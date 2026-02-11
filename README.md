@@ -1,93 +1,127 @@
-Welcome to the Portfolio of Syedain Shigree
-A modern, production-ready web application scaffold powered by cutting-edge technologies, built to deliver high-performance, scalable, and maintainable web applications using industry best practices.
-👨‍💻 About Me
-I'm a passionate web developer focused on building clean, efficient, and user-centric digital experiences. With a strong foundation in modern frontend and full-stack technologies, I specialize in creating responsive, scalable, and production-ready applications.
-I am continuously improving my skills in modern web development, custom WordPress solutions, and full-stack architectures while following best practices in performance, security, and maintainability.
-✨ Technology Stack
-This scaffold provides a robust foundation built with:
-🎯 Core Framework
-⚡ Next.js 16 - The React framework for production with App Router
-📘 TypeScript 5 - Type-safe JavaScript for better developer experience
-🎨 Tailwind CSS 4 - Utility-first CSS framework for rapid UI development
-🧩 UI Components & Styling
-🧩 shadcn/ui - High-quality, accessible components built on Radix UI
-🎯 Lucide React - Beautiful & consistent icon library
-🌈 Framer Motion - Production-ready motion library for React
-🎨 Next Themes - Perfect dark mode in 2 lines of code
-📋 Forms & Validation
-🎣 React Hook Form - Performant forms with easy validation
-✅ Zod - TypeScript-first schema validation
-🔄 State Management & Data Fetching
-🐻 Zustand - Simple, scalable state management
-🔄 TanStack Query - Powerful data synchronization for React
-🌐 Fetch - Promise-based HTTP requests
-🗄️ Database & Backend
-🗄️ Prisma - Next-generation TypeScript ORM
-🔐 NextAuth.js - Complete open-source authentication solution
-🎨 Advanced UI Features
-📊 TanStack Table - Headless UI for building tables and datagrids
-🖱️ DND Kit - Modern drag and drop toolkit for React
-📊 Recharts - Redefined chart library built with React and D3
-🖼️ Sharp - High performance image processing
-🌍 Internationalization & Utilities
-🌍 Next Intl - Internationalization library for Next.js
-📅 Date-fns - Modern JavaScript date utility library
-🪝 ReactUse - Collection of essential React hooks for modern development
-🛠️ Core Skills & Expertise
-Modern Frontend Development (Next.js, React, Tailwind CSS)
-Full-Stack Web Development (Node.js, APIs, Authentication)
-Responsive & Mobile-First UI/UX Design
-Type-Safe Development with TypeScript & Zod
-Secure Authentication & Authorization Systems
-Database Design & ORM with Prisma
-Performance Optimization & Production Builds
-Git, GitHub & Collaborative Development
-Custom WordPress Development with Clean Code
-Scalable Architecture & Maintainable Codebases
-🎯 Why This Project?
-🏎️ Fast Development with modern tooling
-🎨 Professional UI with reusable component systems
-🔒 Strong Type Safety for fewer bugs
-📱 Fully Responsive across all devices
-🗄️ Backend Ready with database and auth
-📊 Advanced Data Handling with tables and charts
-🌍 Internationalization Support
-🚀 Production-Grade Setup for real-world deployment
-🧱 Clean Architecture for long-term scalability
-🚀 Quick Start
-Bash
-Copy code
-# Install dependencies
+# Syedain Shigree — Portfolio Scaffold
+
+A modern, production-ready web application scaffold built to deliver fast, scalable, and maintainable web applications using current industry best practices.
+
+This setup is designed for real-world projects — from early prototypes to full production deployments.
+
+---
+
+## About Me
+
+I’m Syedain Shigree, a web developer focused on building clean, efficient, and user-focused applications. I work primarily with modern frontend tools and also handle full-stack development when required.
+
+I’m continuously improving my skills in scalable architectures, custom WordPress development, and full-stack systems. My focus is on performance, security, and writing maintainable code that can grow with a project.
+
+---
+
+## Technology Stack
+
+This scaffold provides a strong production foundation.
+
+### Core Framework
+- Next.js 16 — React framework with App Router  
+- TypeScript 5 — Type-safe JavaScript  
+- Tailwind CSS 4 — Utility-first styling  
+
+### UI Components & Styling
+- shadcn/ui — Accessible component system  
+- Lucide React — Icon library  
+- Framer Motion — Animations and interactions  
+- Next Themes — Dark and light mode support  
+
+### Forms & Validation
+- React Hook Form — Performant form handling  
+- Zod — Type-safe validation  
+
+### State Management & Data
+- Zustand — Lightweight state management  
+- TanStack Query — Data fetching and caching  
+- Fetch — HTTP requests  
+
+### Database & Authentication
+- Prisma — Type-safe ORM  
+- NextAuth.js — Authentication system  
+
+### Advanced UI
+- TanStack Table — Data tables  
+- DND Kit — Drag and drop  
+- Recharts — Charts and data visualization  
+- Sharp — Image processing  
+
+### Internationalization & Utilities
+- Next Intl — Multi-language support  
+- Date-fns — Date utilities  
+- ReactUse — Common React hooks  
+
+---
+
+## Core Skills
+
+- Modern frontend development (Next.js, React, Tailwind)  
+- Full-stack development (Node.js, APIs, authentication)  
+- Responsive and mobile-first UI/UX  
+- Type-safe systems with TypeScript and Zod  
+- Database design with Prisma  
+- Performance optimization and production builds  
+- Git and GitHub collaboration  
+- Custom WordPress development  
+- Scalable and maintainable architecture  
+
+---
+
+## Why This Scaffold
+
+- Faster development with solid defaults  
+- Clean, reusable UI components  
+- Strong type safety to reduce bugs  
+- Fully responsive layouts  
+- Backend-ready with database and auth  
+- Built for dashboards and data-heavy apps  
+- Internationalization support  
+- Production-ready configuration  
+- Clean architecture for long-term projects  
+
+---
+
+## Quick Start
+
+```bash
 bun install
-
-# Start development server
 bun run dev
-
-# Build for production
 bun run build
-
-# Start production server
 bun start
-Open http://localhost:3000� to see your application running.
-📁 Project Structure
-Copy code
+
+Open http://localhost:3000� to view the app.
+
+---
+
+## Project structure 
 
 src/
-├── app/                 # Next.js App Router pages
-├── components/          # Reusable React components
-│   └── ui/             # shadcn/ui components
-├── hooks/              # Custom React hooks
-└── lib/                # Utility functions and configurations
-🎨 Features & Components
-🧩 UI Components
-Layout, Forms, Feedback, Navigation, Overlay, Data Display
-📊 Data & Visualization
+├── app/          # Next.js App Router
+├── components/   # Reusable components
+│   └── ui/       # UI components
+├── hooks/        # Custom hooks
+└── lib/          # Utilities and configs
+
+## Features
+
+### UI
+Layouts, forms, navigation, overlays, and feedback components
+
+### Data
 Sorting, filtering, pagination, and charts
-🎨 Interactions
+
+### Interactions
 Animations, drag-and-drop, theme switching
-🔐 Backend & Architecture
+
+### Backend
 Authentication, database, API integration, state management
-🌍 Production Features
+
+### Production
 Internationalization, image optimization, full type safety
-Built with ❤️ by Syedain Shigree
-Focused on performance, scalability, and professional-grade development
+
+---
+
+Built by Syedain Shigree  
+Focused on clean code, performance, and real-world production systems.
