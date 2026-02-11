@@ -1,4 +1,4 @@
-# Syedain Shigree — Portfolio Scaffold
+# Syedain Shigree Portfolio Scaffold
 
 A modern, production-ready web application scaffold built to deliver fast, scalable, and maintainable web applications using current industry best practices.
 
