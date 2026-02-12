@@ -14,7 +14,9 @@ import {
   Layers, Video, FileText,
   Award, Briefcase, Heart,
   ArrowRight, Coffee, Rocket, Star,
-  ExternalLink, Send, Phone
+  ExternalLink, Send, Phone, Calendar,
+  Building2, Users, Trophy, Medal,
+  FileCheck, Quote, MessageSquare, Eye
 } from 'lucide-react'
 
 // ============ DATA ============
@@ -55,6 +57,7 @@ const languages = [
   { name: 'Spanish', level: 'Intermediate', percent: 72 },
   { name: 'German', level: 'Basic', percent: 65 },
 ]
+
 const services = [
   { icon: Globe, title: "Web Development", desc: "Full-stack web applications with modern technologies", color: "#3182CE" },
   { icon: Palette, title: "Graphic Design", desc: "Creative visuals, branding, and digital artwork", color: "#D53F8C" },
@@ -67,6 +70,195 @@ const stats = [
   { value: "30+", label: "Clients", icon: Heart },
   { value: "5+", label: "Years", icon: Coffee },
   { value: "15+", label: "Technologies", icon: Code2 },
+]
+
+const projects = [
+  {
+    title: "Excel Education System",
+    category: "School Website",
+    description: "A comprehensive school management website featuring student portals, course management, attendance tracking, and parent communication system with modern responsive design.",
+    image: "/project-school.png",
+    technologies: ["HTML5", "CSS3", "JavaScript", "PHP", "MySQL", "Bootstrap"],
+    color: "#3182CE",
+    liveUrl: "#",
+    githubUrl: "#"
+  },
+  {
+    title: "Education Registration System",
+    category: "Web Application",
+    description: "Full-featured student registration and enrollment system with automated workflows, document verification, payment integration, and administrative dashboard for educational institutions.",
+    image: "/project-registration.png",
+    technologies: ["PHP", "Laravel", "MySQL", "JavaScript", "Bootstrap", "AJAX"],
+    color: "#805AD5",
+    liveUrl: "#",
+    githubUrl: "#"
+  },
+  {
+    title: "Vehicle Number Plate Identifier",
+    category: "AI/ML System",
+    description: "Intelligent Automatic Number Plate Recognition (ANPR) system using computer vision and machine learning to detect, extract, and identify vehicle license plates from images and video streams.",
+    image: "/project-vehicle.png",
+    technologies: ["Python", "OpenCV", "TensorFlow", "Tesseract OCR", "NumPy", "Flask"],
+    color: "#38A169",
+    liveUrl: "#",
+    githubUrl: "#"
+  },
+  {
+    title: "Tour Master",
+    category: "Travel Website",
+    description: "Dynamic tourism and travel booking platform featuring destination showcases, tour package management, booking system, and interactive maps for travelers exploring beautiful regions.",
+    image: "/project-tour.png",
+    technologies: ["HTML5", "CSS3", "JavaScript", "PHP", "MySQL", "Google Maps API"],
+    color: "#D69E2E",
+    liveUrl: "#",
+    githubUrl: "#"
+  },
+  {
+    title: "E-Commerce Platform",
+    category: "Online Store",
+    description: "Feature-rich e-commerce solution with product catalog, shopping cart, secure checkout, order management, customer accounts, and admin panel for inventory control.",
+    image: "/project-ecommerce.png",
+    technologies: ["PHP", "Laravel", "MySQL", "JavaScript", "Stripe API", "Bootstrap"],
+    color: "#D53F8C",
+    liveUrl: "#",
+    githubUrl: "#"
+  },
+  {
+    title: "Portfolio Dashboard",
+    category: "Analytics Platform",
+    description: "Modern portfolio analytics dashboard with interactive data visualizations, project tracking, performance metrics, and beautiful reporting interface for creative professionals.",
+    image: "/project-portfolio.png",
+    technologies: ["React", "TypeScript", "Chart.js", "Tailwind CSS", "Node.js", "MongoDB"],
+    color: "#E53E3E",
+    liveUrl: "#",
+    githubUrl: "#"
+  },
+]
+
+const workExperience = [
+  {
+    title: "Freelance Full Stack Developer",
+    company: "Self-Employed",
+    location: "Skardu, Pakistan",
+    period: "2020 - Present",
+    description: "Delivering comprehensive web development solutions for clients worldwide. Specialized in creating responsive websites, e-commerce platforms, and custom web applications using modern technologies.",
+    achievements: ["Completed 50+ projects", "Served 30+ clients globally", "5-star ratings on freelance platforms"],
+    icon: Code2,
+    color: "#3182CE"
+  },
+  {
+    title: "Graphic Designer",
+    company: "Creative Studios",
+    location: "Remote",
+    period: "2019 - Present",
+    description: "Creating stunning visual designs including logos, brand identities, marketing materials, social media graphics, and UI/UX designs for various businesses and startups.",
+    achievements: ["Designed 100+ brand identities", "Created marketing materials for 40+ campaigns", "Specialized in Adobe Creative Suite"],
+    icon: Palette,
+    color: "#D53F8C"
+  },
+  {
+    title: "Web Development Intern",
+    company: "Tech Solutions",
+    location: "Gilgit-Baltistan",
+    period: "2019 - 2020",
+    description: "Gained hands-on experience in web development workflows, collaborated on client projects, and developed proficiency in PHP, Laravel, and front-end technologies.",
+    achievements: ["Contributed to 15+ live projects", "Learned industry best practices", "Built foundation in full-stack development"],
+    icon: Briefcase,
+    color: "#805AD5"
+  },
+]
+
+const certifications = [
+  {
+    name: "Full Stack Web Development",
+    issuer: "Udemy",
+    date: "2023",
+    credentialId: "UC-2023-FSWD",
+    icon: Award,
+    color: "#3182CE"
+  },
+  {
+    name: "Graphic Design Masterclass",
+    issuer: "Coursera",
+    date: "2022",
+    credentialId: "CG-2022-GDM",
+    icon: Palette,
+    color: "#D53F8C"
+  },
+  {
+    name: "Python for Data Science",
+    issuer: "edX",
+    date: "2023",
+    credentialId: "EX-2023-PDS",
+    icon: Code2,
+    color: "#38A169"
+  },
+  {
+    name: "Laravel Framework Certification",
+    issuer: "Laravel",
+    date: "2022",
+    credentialId: "LV-2022-CERT",
+    icon: Server,
+    color: "#D69E2E"
+  },
+]
+
+const achievements = [
+  {
+    title: "Top Rated Freelancer",
+    description: "Achieved Top Rated status on major freelance platforms with 100% job success score and consistent 5-star client reviews.",
+    year: "2024",
+    icon: Trophy,
+    color: "#D69E2E"
+  },
+  {
+    title: "50+ Projects Delivered",
+    description: "Successfully completed over 50 web development and design projects for clients across multiple countries and industries.",
+    year: "2024",
+    icon: Rocket,
+    color: "#3182CE"
+  },
+  {
+    title: "Community Contributor",
+    description: "Active contributor to open-source projects and developer communities, sharing knowledge through tutorials and code snippets.",
+    year: "2023",
+    icon: Users,
+    color: "#805AD5"
+  },
+  {
+    title: "Multilingual Professional",
+    description: "Proficient in 6 languages including Balti, Urdu, Shina, English, Spanish, and German, enabling global client communication.",
+    year: "2023",
+    icon: Languages,
+    color: "#38A169"
+  },
+]
+
+const references = [
+  {
+    name: "Ahmed Khan",
+    position: "CEO, TechVentures",
+    company: "TechVentures Inc.",
+    quote: "Syedain delivered exceptional work on our e-commerce platform. His attention to detail and technical expertise exceeded our expectations. Highly recommended for any web development project.",
+    avatar: "AK",
+    color: "#3182CE"
+  },
+  {
+    name: "Sarah Williams",
+    position: "Marketing Director",
+    company: "Global Brands Co.",
+    quote: "Working with Syedain on our brand identity was a pleasure. He understood our vision perfectly and delivered stunning designs that truly represent our brand values.",
+    avatar: "SW",
+    color: "#D53F8C"
+  },
+  {
+    name: "Muhammad Ali",
+    position: "Project Manager",
+    company: "Digital Solutions PK",
+    quote: "Professional, reliable, and incredibly talented. Syedain's work on our registration system was flawless. He's our go-to developer for all web projects.",
+    avatar: "MA",
+    color: "#805AD5"
+  },
 ]
 
 // ============ COMPONENTS ============
@@ -159,6 +351,65 @@ function Section({ id, children, className = '' }: { id: string; children: React
   )
 }
 
+// Project Card Component
+function ProjectCard({ project, index }: { project: typeof projects[0]; index: number }) {
+  const [isHovered, setIsHovered] = useState(false)
+  
+  return (
+    <div 
+      className="group relative"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      <Card className="overflow-hidden bg-white border border-gray-100 hover:border-gray-200 transition-all duration-300 hover:shadow-xl">
+        <div className="relative aspect-video overflow-hidden">
+          <img 
+            src={project.image} 
+            alt={project.title}
+            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+          />
+          <div className={`absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent transition-opacity duration-300 ${isHovered ? 'opacity-100' : 'opacity-0'}`} />
+          <div className={`absolute bottom-0 left-0 right-0 p-4 transform transition-all duration-300 ${isHovered ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
+            <div className="flex gap-2">
+              <Button size="sm" className="bg-white text-gray-800 hover:bg-gray-100">
+                <Eye className="w-4 h-4 mr-1" /> Live Demo
+              </Button>
+              <Button size="sm" variant="outline" className="bg-white/20 text-white border-white/40 hover:bg-white/30">
+                <Github className="w-4 h-4 mr-1" /> Code
+              </Button>
+            </div>
+          </div>
+          <div className="absolute top-3 right-3">
+            <Badge style={{ backgroundColor: project.color }} className="text-white border-0">
+              {project.category}
+            </Badge>
+          </div>
+        </div>
+        <CardContent className="p-5">
+          <h3 className="text-lg font-bold text-gray-800 mb-2 group-hover:text-[#3182CE] transition-colors">
+            {project.title}
+          </h3>
+          <p className="text-sm text-gray-500 mb-4 line-clamp-2">
+            {project.description}
+          </p>
+          <div className="flex flex-wrap gap-1.5">
+            {project.technologies.slice(0, 4).map((tech, i) => (
+              <Badge key={i} variant="secondary" className="bg-gray-100 text-gray-600 text-xs border-0">
+                {tech}
+              </Badge>
+            ))}
+            {project.technologies.length > 4 && (
+              <Badge variant="secondary" className="bg-gray-100 text-gray-600 text-xs border-0">
+                +{project.technologies.length - 4}
+              </Badge>
+            )}
+          </div>
+        </CardContent>
+      </Card>
+    </div>
+  )
+}
+
 // ============ MAIN PORTFOLIO ============
 export default function Portfolio() {
   const [scrolled, setScrolled] = useState(false)
@@ -166,14 +417,13 @@ export default function Portfolio() {
   const [loaded, setLoaded] = useState(false)
 
   useEffect(() => {
-    // Use requestAnimationFrame to avoid cascading renders
     requestAnimationFrame(() => {
       setLoaded(true)
     })
     
     const handleScroll = () => {
       setScrolled(window.scrollY > 50)
-      const sections = ['hero', 'about', 'skills', 'services', 'languages', 'education', 'contact']
+      const sections = ['hero', 'about', 'skills', 'services', 'projects', 'experience', 'certifications', 'achievements', 'languages', 'education', 'references', 'contact']
       for (const id of sections.reverse()) {
         const el = document.getElementById(id)
         if (el && window.scrollY >= el.offsetTop - 200) {
@@ -188,12 +438,24 @@ export default function Portfolio() {
 
   const scrollTo = (id: string) => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
 
+  const handleDownloadCV = () => {
+    const link = document.createElement('a')
+    link.href = '/cv-syedain-shigree.pdf'
+    link.download = 'Syedain_Shigree_CV.pdf'
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+  }
+
+  const handleWhatsApp = () => {
+    window.open('https://wa.me/923125115070', '_blank')
+  }
+
   return (
     <div className="min-h-screen bg-[#F5F7FA] text-[#1A202C] overflow-x-hidden">
       
       {/* ========== ANIMATED BACKGROUND ========== */}
       <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
-        {/* Gradient Blobs */}
         <div className="absolute w-[600px] h-[600px] rounded-full filter blur-[100px] opacity-50 animate-blob" 
           style={{ background: '#E6FFFA', top: '-10%', left: '-10%' }} />
         <div className="absolute w-[500px] h-[500px] rounded-full filter blur-[100px] opacity-50 animate-blob" 
@@ -210,7 +472,7 @@ export default function Portfolio() {
           </div>
           
           <div className="hidden md:flex items-center gap-6">
-            {['About', 'Skills', 'Services', 'Contact'].map((item) => (
+            {['About', 'Skills', 'Projects', 'Contact'].map((item) => (
               <button
                 key={item}
                 onClick={() => scrollTo(item.toLowerCase())}
@@ -239,20 +501,17 @@ export default function Portfolio() {
       <section id="hero" className="relative min-h-screen flex items-center justify-center px-6 pt-20">
         <div className={`max-w-5xl mx-auto text-center transition-all duration-1000 ${loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           
-          {/* Status Badge */}
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/80 border border-gray-200 shadow-sm mb-8">
             <span className="w-2 h-2 bg-[#38A169] rounded-full animate-pulse" />
             <span className="text-sm text-gray-600">Available for freelance projects</span>
           </div>
 
-          {/* Main Heading */}
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-extrabold mb-6 leading-[1.1] tracking-tight">
             <span className="text-gray-800">Hi, I'm</span>
             <br />
             <span className="gradient-text">Syedain Shigree</span>
           </h1>
 
-          {/* Subtitle */}
           <p className="text-xl md:text-2xl text-gray-600 mb-4 max-w-2xl mx-auto font-medium">
             Full Stack Developer & Graphic Designer
           </p>
@@ -260,7 +519,6 @@ export default function Portfolio() {
             Crafting beautiful digital experiences from the heart of Skardu, Pakistan
           </p>
 
-          {/* CTA Buttons */}
           <div className="flex flex-wrap justify-center gap-4 mb-12">
             <Button 
               size="lg"
@@ -273,6 +531,7 @@ export default function Portfolio() {
             <Button 
               size="lg"
               variant="outline"
+              onClick={handleDownloadCV}
               className="rounded-full px-8 border-2 border-gray-200 text-gray-700 hover:bg-white text-lg"
             >
               <Download className="w-5 h-5 mr-2" />
@@ -280,7 +539,6 @@ export default function Portfolio() {
             </Button>
           </div>
 
-          {/* Social Links */}
           <div className="flex justify-center gap-3">
             {[
               { icon: Github, label: 'GitHub' },
@@ -298,7 +556,6 @@ export default function Portfolio() {
             ))}
           </div>
 
-          {/* Scroll Indicator */}
           <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
             <ChevronDown className="w-6 h-6 text-gray-400" />
           </div>
@@ -325,11 +582,9 @@ export default function Portfolio() {
         <div className="max-w-6xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             
-{/* Profile Card */}
             <div className="relative">
               <TiltCard>
                 <div className="relative bg-white rounded-3xl p-8 shadow-float border border-gray-100">
-                  {/* Profile Image */}
                   <img 
                     src="/profile.jpg" 
                     className="w-40 h-40 mx-auto mb-6 rounded-full object-cover shadow-lg border-4 border-white"
@@ -356,7 +611,6 @@ export default function Portfolio() {
               </TiltCard>
             </div>
 
-            {/* About Content */}
             <div>
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-50 mb-6">
                 <Zap className="w-4 h-4 text-[#3182CE]" />
@@ -380,7 +634,6 @@ export default function Portfolio() {
                 precision to every project.
               </p>
 
-              {/* Quick Info Grid */}
               <div className="grid grid-cols-2 gap-4">
                 <div className="flex items-center gap-3 p-4 bg-white rounded-xl border border-gray-100">
                   <div className="w-10 h-10 rounded-lg bg-blue-50 flex items-center justify-center">
@@ -485,7 +738,190 @@ export default function Portfolio() {
         </div>
       </Section>
 
-{/* ========== LANGUAGES SECTION ========== */}
+      {/* ========== PROJECTS SECTION ========== */}
+      <Section id="projects" className="py-24 px-6 bg-white">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-50 mb-6">
+              <Rocket className="w-4 h-4 text-indigo-500" />
+              <span className="text-sm font-medium text-indigo-500">Portfolio</span>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">
+              Featured <span className="gradient-text">Projects</span>
+            </h2>
+            <p className="text-gray-500 max-w-2xl mx-auto">
+              A showcase of my best work across web development, design, and AI projects.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {projects.map((project, i) => (
+              <ProjectCard key={i} project={project} index={i} />
+            ))}
+          </div>
+        </div>
+      </Section>
+
+      {/* ========== WORK EXPERIENCE SECTION ========== */}
+      <Section id="experience" className="py-24 px-6">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-16">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cyan-50 mb-6">
+              <Briefcase className="w-4 h-4 text-cyan-500" />
+              <span className="text-sm font-medium text-cyan-500">Experience</span>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">
+              Work <span className="gradient-text">Experience</span>
+            </h2>
+            <p className="text-gray-500 max-w-2xl mx-auto">
+              My professional journey and career milestones.
+            </p>
+          </div>
+
+          <div className="relative">
+            <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-[#3182CE] via-[#805AD5] to-[#D53F8C]" />
+
+            <div className="space-y-8">
+              {workExperience.map((exp, i) => (
+                <div key={i} className="relative pl-20">
+                  <div 
+                    className="absolute left-5 w-7 h-7 rounded-full flex items-center justify-center shadow-lg"
+                    style={{ backgroundColor: exp.color }}
+                  >
+                    <exp.icon className="w-4 h-4 text-white" />
+                  </div>
+                  <Card className="bg-white border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
+                    <CardContent className="p-6">
+                      <div className="flex flex-wrap items-start justify-between gap-2 mb-3">
+                        <div>
+                          <h3 className="text-xl font-bold text-gray-800">{exp.title}</h3>
+                          <div className="flex items-center gap-2 text-gray-500">
+                            <Building2 className="w-4 h-4" />
+                            <span>{exp.company}</span>
+                            <span className="text-gray-300">|</span>
+                            <MapPin className="w-4 h-4" />
+                            <span>{exp.location}</span>
+                          </div>
+                        </div>
+                        <Badge variant="outline" className="text-gray-600 border-gray-200">
+                          <Calendar className="w-3 h-3 mr-1" />
+                          {exp.period}
+                        </Badge>
+                      </div>
+                      <p className="text-gray-600 mb-4">{exp.description}</p>
+                      <div className="flex flex-wrap gap-2">
+                        {exp.achievements.map((achievement, j) => (
+                          <Badge key={j} variant="secondary" className="bg-gray-100 text-gray-600 border-0">
+                            <Trophy className="w-3 h-3 mr-1 text-yellow-500" />
+                            {achievement}
+                          </Badge>
+                        ))}
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </Section>
+
+      {/* ========== CERTIFICATIONS SECTION ========== */}
+      <Section id="certifications" className="py-24 px-6 bg-white">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-16">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-amber-50 mb-6">
+              <Award className="w-4 h-4 text-amber-500" />
+              <span className="text-sm font-medium text-amber-500">Certifications</span>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">
+              Professional <span className="gradient-text">Certifications</span>
+            </h2>
+            <p className="text-gray-500 max-w-2xl mx-auto">
+              Verified credentials and professional development achievements.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-6">
+            {certifications.map((cert, i) => (
+              <Card key={i} className="bg-[#F5F7FA] border-0 shadow-sm hover:shadow-md transition-all group cursor-pointer">
+                <CardContent className="p-6">
+                  <div className="flex items-start gap-4">
+                    <div 
+                      className="w-14 h-14 rounded-2xl flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform"
+                      style={{ backgroundColor: `${cert.color}15` }}
+                    >
+                      <cert.icon className="w-7 h-7" style={{ color: cert.color }} />
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="text-lg font-bold text-gray-800 mb-1">{cert.name}</h3>
+                      <p className="text-gray-500 text-sm mb-2">{cert.issuer}</p>
+                      <div className="flex items-center gap-4 text-xs text-gray-400">
+                        <span className="flex items-center gap-1">
+                          <Calendar className="w-3 h-3" />
+                          {cert.date}
+                        </span>
+                        <span className="flex items-center gap-1">
+                          <FileCheck className="w-3 h-3" />
+                          {cert.credentialId}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </Section>
+
+      {/* ========== ACHIEVEMENTS SECTION ========== */}
+      <Section id="achievements" className="py-24 px-6">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-16">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-rose-50 mb-6">
+              <Trophy className="w-4 h-4 text-rose-500" />
+              <span className="text-sm font-medium text-rose-500">Achievements</span>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">
+              Notable <span className="gradient-text">Achievements</span>
+            </h2>
+            <p className="text-gray-500 max-w-2xl mx-auto">
+              Recognition and milestones throughout my career.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-6">
+            {achievements.map((achievement, i) => (
+              <TiltCard key={i}>
+                <Card className="h-full bg-white border border-gray-100 shadow-sm hover:shadow-lg transition-all">
+                  <CardContent className="p-6">
+                    <div className="flex items-start gap-4">
+                      <div 
+                        className="w-14 h-14 rounded-2xl flex items-center justify-center shrink-0"
+                        style={{ backgroundColor: `${achievement.color}15` }}
+                      >
+                        <achievement.icon className="w-7 h-7" style={{ color: achievement.color }} />
+                      </div>
+                      <div className="flex-1">
+                        <div className="flex items-center justify-between mb-2">
+                          <h3 className="text-lg font-bold text-gray-800">{achievement.title}</h3>
+                          <Badge variant="outline" className="text-gray-500 border-gray-200">
+                            {achievement.year}
+                          </Badge>
+                        </div>
+                        <p className="text-gray-500 text-sm">{achievement.description}</p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </TiltCard>
+            ))}
+          </div>
+        </div>
+      </Section>
+
+      {/* ========== LANGUAGES SECTION ========== */}
       <Section id="languages" className="py-24 px-6 bg-white">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-16">
@@ -544,10 +980,8 @@ export default function Portfolio() {
           </div>
 
           <div className="relative">
-            {/* Timeline Line */}
             <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-[#3182CE] via-[#805AD5] to-[#D53F8C]" />
 
-            {/* Timeline Items */}
             <div className="space-y-8">
               <div className="relative pl-20">
                 <div className="absolute left-5 w-7 h-7 bg-[#3182CE] rounded-full flex items-center justify-center shadow-lg">
@@ -559,7 +993,7 @@ export default function Portfolio() {
                       <h3 className="text-xl font-bold text-gray-800">Higher Secondary Education</h3>
                       <Badge className="bg-green-50 text-green-600 border-0">Completed</Badge>
                     </div>
-                    <p className="text-gray-500">12th Grade • Science Stream</p>
+                    <p className="text-gray-500">12th Grade - Science Stream</p>
                     <p className="text-sm text-gray-400 mt-1">Skardu, Pakistan</p>
                   </CardContent>
                 </Card>
@@ -588,6 +1022,48 @@ export default function Portfolio() {
         </div>
       </Section>
 
+      {/* ========== REFERENCES SECTION ========== */}
+      <Section id="references" className="py-24 px-6 bg-white">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-16">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-50 mb-6">
+              <MessageSquare className="w-4 h-4 text-emerald-500" />
+              <span className="text-sm font-medium text-emerald-500">References</span>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">
+              Client <span className="gradient-text">Testimonials</span>
+            </h2>
+            <p className="text-gray-500 max-w-2xl mx-auto">
+              What clients and collaborators say about working with me.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-6">
+            {references.map((ref, i) => (
+              <Card key={i} className="bg-[#F5F7FA] border-0 shadow-sm hover:shadow-lg transition-all">
+                <CardContent className="p-6">
+                  <Quote className="w-8 h-8 mb-4" style={{ color: ref.color }} />
+                  <p className="text-gray-600 mb-6 italic">&quot;{ref.quote}&quot;</p>
+                  <div className="flex items-center gap-3">
+                    <div 
+                      className="w-12 h-12 rounded-full flex items-center justify-center text-white font-bold"
+                      style={{ backgroundColor: ref.color }}
+                    >
+                      {ref.avatar}
+                    </div>
+                    <div>
+                      <div className="font-semibold text-gray-800">{ref.name}</div>
+                      <div className="text-sm text-gray-500">{ref.position}</div>
+                      <div className="text-xs text-gray-400">{ref.company}</div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </Section>
+
       {/* ========== CONTACT SECTION ========== */}
       <Section id="contact" className="py-24 px-6 bg-gradient-to-br from-[#3182CE] to-[#805AD5]">
         <div className="max-w-5xl mx-auto">
@@ -597,15 +1073,14 @@ export default function Portfolio() {
               <span className="text-sm font-medium text-white">Contact</span>
             </div>
             <h2 className="text-4xl md:text-5xl font-bold mb-4 text-white">
-              Let's Work Together
+              Let&apos;s Work Together
             </h2>
             <p className="text-white/80 max-w-2xl mx-auto">
-              Have a project in mind? I'd love to hear from you. Let's create something amazing.
+              Have a project in mind? I&apos;d love to hear from you. Let&apos;s create something amazing.
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-8">
-            {/* Contact Info */}
             <div className="space-y-4">
               <Card className="bg-white/10 backdrop-blur border-white/20">
                 <CardContent className="p-6">
@@ -621,15 +1096,15 @@ export default function Portfolio() {
                 </CardContent>
               </Card>
 
-              <Card className="bg-white/10 backdrop-blur border-white/20">
+              <Card className="bg-white/10 backdrop-blur border-white/20 cursor-pointer hover:bg-white/20 transition-all" onClick={handleWhatsApp}>
                 <CardContent className="p-6">
                   <div className="flex items-center gap-4">
                     <div className="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center">
                       <Phone className="w-6 h-6 text-white" />
                     </div>
                     <div>
-                      <div className="text-sm text-white/70">Phone</div>
-                      <div className="text-white font-medium">+92 XXX XXX XXXX</div>
+                      <div className="text-sm text-white/70">WhatsApp</div>
+                      <div className="text-white font-medium">+92 312 5115070</div>
                     </div>
                   </div>
                 </CardContent>
@@ -650,15 +1125,15 @@ export default function Portfolio() {
               </Card>
             </div>
 
-            {/* CTA Card */}
             <div className="bg-white rounded-3xl p-8 shadow-xl">
               <h3 className="text-2xl font-bold text-gray-800 mb-4">Send a Message</h3>
               <p className="text-gray-500 mb-6">
-                Ready to start your next project? Get in touch and let's discuss how I can help.
+                Ready to start your next project? Get in touch and let&apos;s discuss how I can help.
               </p>
               
               <Button 
                 size="lg"
+                onClick={handleWhatsApp}
                 className="w-full bg-gradient-to-r from-[#3182CE] to-[#805AD5] hover:from-[#2C5282] hover:to-[#6B46C1] text-white rounded-full"
               >
                 <Send className="w-5 h-5 mr-2" />
@@ -666,7 +1141,7 @@ export default function Portfolio() {
               </Button>
 
               <div className="mt-6 pt-6 border-t border-gray-100">
-<div className="flex justify-center gap-3">
+                <div className="flex justify-center gap-3">
                   <a href="https://github.com/Syedain-Iqbal-Shigri" target="_blank" className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 hover:bg-[#3182CE] hover:text-white transition-all">
                     <Github className="w-5 h-5" />
                   </a>
@@ -697,12 +1172,12 @@ export default function Portfolio() {
             <div className="flex items-center gap-6 text-sm text-gray-500">
               <a href="#about" className="hover:text-[#3182CE] transition-colors">About</a>
               <a href="#skills" className="hover:text-[#3182CE] transition-colors">Skills</a>
-              <a href="#services" className="hover:text-[#3182CE] transition-colors">Services</a>
+              <a href="#projects" className="hover:text-[#3182CE] transition-colors">Projects</a>
               <a href="#contact" className="hover:text-[#3182CE] transition-colors">Contact</a>
             </div>
 
             <div className="text-sm text-gray-400">
-              © 2025 Syedain Shigree
+              2025 Syedain Shigree
             </div>
           </div>
 
