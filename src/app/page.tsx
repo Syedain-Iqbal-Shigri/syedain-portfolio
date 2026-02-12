@@ -327,6 +327,44 @@ function SkillBar({ name, level, color }: { name: string; level: number; color: 
   )
 }
 
+// Language Progress Bar with Animation
+function LanguageBar({ name, level, percent }: { name: string; level: string; percent: number }) {
+  const [width, setWidth] = useState(0)
+  const ref = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) setTimeout(() => setWidth(percent), 200) },
+      { threshold: 0.1 }
+    )
+    if (ref.current) observer.observe(ref.current)
+    return () => observer.disconnect()
+  }, [percent])
+
+  return (
+    <div ref={ref} className="group">
+      <div className="flex items-center justify-between mb-2">
+        <div className="flex items-center gap-3">
+          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#3182CE] to-[#805AD5] flex items-center justify-center text-white text-xs font-bold">
+            {name.charAt(0)}
+          </div>
+          <span className="font-semibold text-gray-800">{name}</span>
+        </div>
+        <div className="flex items-center gap-3">
+          <span className="text-sm text-gray-500">{level}</span>
+          <span className="text-sm font-bold text-[#3182CE]">{percent}%</span>
+        </div>
+      </div>
+      <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
+        <div 
+          className="h-full bg-gradient-to-r from-[#3182CE] to-[#805AD5] rounded-full transition-all duration-1000 ease-out"
+          style={{ width: `${width}%` }}
+        />
+      </div>
+    </div>
+  )
+}
+
 // Section Wrapper with Animation
 function Section({ id, children, className = '' }: { id: string; children: React.ReactNode; className?: string }) {
   const [isVisible, setIsVisible] = useState(false)
@@ -778,40 +816,40 @@ export default function Portfolio() {
             </p>
           </div>
 
-          <div className="relative">
-            <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-[#3182CE] via-[#805AD5] to-[#D53F8C]" />
+          <div className="relative timeline-section">
+            <div className="absolute left-4 md:left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-[#3182CE] via-[#805AD5] to-[#D53F8C] timeline-line" />
 
             <div className="space-y-8">
               {workExperience.map((exp, i) => (
-                <div key={i} className="relative pl-20">
+                <div key={i} className="relative pl-12 md:pl-20 timeline-item">
                   <div 
-                    className="absolute left-5 w-7 h-7 rounded-full flex items-center justify-center shadow-lg"
+                    className="absolute left-2 md:left-5 w-6 h-6 md:w-7 md:h-7 rounded-full flex items-center justify-center shadow-lg timeline-dot"
                     style={{ backgroundColor: exp.color }}
                   >
-                    <exp.icon className="w-4 h-4 text-white" />
+                    <exp.icon className="w-3 h-3 md:w-4 md:h-4 text-white" />
                   </div>
                   <Card className="bg-white border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
-                    <CardContent className="p-6">
+                    <CardContent className="p-4 md:p-6">
                       <div className="flex flex-wrap items-start justify-between gap-2 mb-3">
                         <div>
-                          <h3 className="text-xl font-bold text-gray-800">{exp.title}</h3>
-                          <div className="flex items-center gap-2 text-gray-500">
-                            <Building2 className="w-4 h-4" />
+                          <h3 className="text-lg md:text-xl font-bold text-gray-800">{exp.title}</h3>
+                          <div className="flex flex-wrap items-center gap-1 md:gap-2 text-gray-500 text-sm">
+                            <Building2 className="w-3 h-3 md:w-4 md:h-4" />
                             <span>{exp.company}</span>
-                            <span className="text-gray-300">|</span>
-                            <MapPin className="w-4 h-4" />
+                            <span className="text-gray-300 hidden md:inline">|</span>
+                            <MapPin className="w-3 h-3 md:w-4 md:h-4" />
                             <span>{exp.location}</span>
                           </div>
                         </div>
-                        <Badge variant="outline" className="text-gray-600 border-gray-200">
+                        <Badge variant="outline" className="text-gray-600 border-gray-200 text-xs">
                           <Calendar className="w-3 h-3 mr-1" />
                           {exp.period}
                         </Badge>
                       </div>
-                      <p className="text-gray-600 mb-4">{exp.description}</p>
+                      <p className="text-gray-600 mb-4 text-sm md:text-base">{exp.description}</p>
                       <div className="flex flex-wrap gap-2">
                         {exp.achievements.map((achievement, j) => (
-                          <Badge key={j} variant="secondary" className="bg-gray-100 text-gray-600 border-0">
+                          <Badge key={j} variant="secondary" className="bg-gray-100 text-gray-600 border-0 text-xs">
                             <Trophy className="w-3 h-3 mr-1 text-yellow-500" />
                             {achievement}
                           </Badge>
@@ -937,29 +975,10 @@ export default function Portfolio() {
             </p>
           </div>
 
-          <div className="bg-[#F5F7FA] rounded-3xl p-8 shadow-sm">
-            <div className="grid md:grid-cols-2 gap-x-12 gap-y-6">
+          <div className="bg-[#F5F7FA] rounded-3xl p-4 sm:p-8 shadow-sm">
+            <div className="grid md:grid-cols-2 gap-x-8 sm:gap-x-12 gap-y-6">
               {languages.map((lang, i) => (
-                <div key={i} className="group">
-                  <div className="flex items-center justify-between mb-2">
-                    <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#3182CE] to-[#805AD5] flex items-center justify-center text-white text-xs font-bold">
-                        {lang.name.charAt(0)}
-                      </div>
-                      <span className="font-semibold text-gray-800">{lang.name}</span>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <span className="text-sm text-gray-500">{lang.level}</span>
-                      <span className="text-sm font-bold text-[#3182CE]">{lang.percent}%</span>
-                    </div>
-                  </div>
-                  <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
-                    <div 
-                      className="h-full bg-gradient-to-r from-[#3182CE] to-[#805AD5] rounded-full transition-all duration-1000"
-                      style={{ width: `${lang.percent}%` }}
-                    />
-                  </div>
-                </div>
+                <LanguageBar key={i} name={lang.name} level={lang.level} percent={lang.percent} />
               ))}
             </div>
           </div>
@@ -979,18 +998,18 @@ export default function Portfolio() {
             </h2>
           </div>
 
-          <div className="relative">
-            <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-[#3182CE] via-[#805AD5] to-[#D53F8C]" />
+          <div className="relative timeline-section">
+            <div className="absolute left-4 md:left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-[#3182CE] via-[#805AD5] to-[#D53F8C] timeline-line" />
 
             <div className="space-y-8">
-              <div className="relative pl-20">
-                <div className="absolute left-5 w-7 h-7 bg-[#3182CE] rounded-full flex items-center justify-center shadow-lg">
-                  <GraduationCap className="w-4 h-4 text-white" />
+              <div className="relative pl-12 md:pl-20 timeline-item">
+                <div className="absolute left-2 md:left-5 w-6 h-6 md:w-7 md:h-7 bg-[#3182CE] rounded-full flex items-center justify-center shadow-lg timeline-dot">
+                  <GraduationCap className="w-3 h-3 md:w-4 md:h-4 text-white" />
                 </div>
                 <Card className="bg-white border border-gray-100 shadow-sm">
-                  <CardContent className="p-6">
-                    <div className="flex items-center justify-between mb-2">
-                      <h3 className="text-xl font-bold text-gray-800">Higher Secondary Education</h3>
+                  <CardContent className="p-4 md:p-6">
+                    <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
+                      <h3 className="text-lg md:text-xl font-bold text-gray-800">Higher Secondary Education</h3>
                       <Badge className="bg-green-50 text-green-600 border-0">Completed</Badge>
                     </div>
                     <p className="text-gray-500">12th Grade - Science Stream</p>
@@ -999,17 +1018,17 @@ export default function Portfolio() {
                 </Card>
               </div>
 
-              <div className="relative pl-20">
-                <div className="absolute left-5 w-7 h-7 bg-[#805AD5] rounded-full flex items-center justify-center shadow-lg">
-                  <Award className="w-4 h-4 text-white" />
+              <div className="relative pl-12 md:pl-20 timeline-item">
+                <div className="absolute left-2 md:left-5 w-6 h-6 md:w-7 md:h-7 bg-[#805AD5] rounded-full flex items-center justify-center shadow-lg timeline-dot">
+                  <Award className="w-3 h-3 md:w-4 md:h-4 text-white" />
                 </div>
                 <Card className="bg-white border border-gray-100 shadow-sm">
-                  <CardContent className="p-6">
-                    <h3 className="text-xl font-bold text-gray-800 mb-2">Self-Taught Professional</h3>
+                  <CardContent className="p-4 md:p-6">
+                    <h3 className="text-lg md:text-xl font-bold text-gray-800 mb-2">Self-Taught Professional</h3>
                     <p className="text-gray-500 mb-3">Continuous Learning & Development</p>
                     <div className="flex flex-wrap gap-2">
                       {['Web Development', 'Graphic Design', 'Programming', 'UI/UX Design', 'Motion Graphics'].map((skill, i) => (
-                        <Badge key={i} variant="secondary" className="bg-gray-100 text-gray-600 border-0">
+                        <Badge key={i} variant="secondary" className="bg-gray-100 text-gray-600 border-0 text-xs">
                           {skill}
                         </Badge>
                       ))}
