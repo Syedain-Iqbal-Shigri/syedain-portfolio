@@ -14,24 +14,33 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Z.ai Code Scaffold - AI-Powered Development",
-  description: "Modern Next.js scaffold optimized for AI-powered development with Z.ai. Built with TypeScript, Tailwind CSS, and shadcn/ui.",
-  keywords: ["Z.ai", "Next.js", "TypeScript", "Tailwind CSS", "shadcn/ui", "AI development", "React"],
-  authors: [{ name: "Z.ai Team" }],
+  title: "Syedain Shigree | Full Stack Developer & Graphic Designer",
+  description: "Professional portfolio of Syedain Shigree - Full Stack Developer and Graphic Designer from Skardu, Pakistan. Expert in PHP, Laravel, JavaScript, Python, and Adobe Creative Suite.",
+  keywords: ["Syedain Shigree", "Full Stack Developer", "Graphic Designer", "Web Developer", "Laravel", "PHP", "JavaScript", "Python", "UI/UX", "Skardu", "Pakistan", "Freelancer"],
+  authors: [{ name: "Syedain Shigree" }],
   icons: {
-    icon: "https://z-cdn.chatglm.cn/z-ai/static/logo.svg",
+    icon: "/favicon.ico",
   },
   openGraph: {
-    title: "Z.ai Code Scaffold",
-    description: "AI-powered development with modern React stack",
-    url: "https://chat.z.ai",
-    siteName: "Z.ai",
+    title: "Syedain Shigree | Full Stack Developer & Graphic Designer",
+    description: "Professional portfolio showcasing web development and graphic design projects. Crafting beautiful digital experiences from Skardu, Pakistan.",
+    url: "https://syedain-portfolio.vercel.app",
+    siteName: "Syedain Shigree Portfolio",
     type: "website",
+    images: [
+      {
+        url: "/profile.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Syedain Shigree - Full Stack Developer & Graphic Designer",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Z.ai Code Scaffold",
-    description: "AI-powered development with modern React stack",
+    title: "Syedain Shigree | Full Stack Developer & Graphic Designer",
+    description: "Professional portfolio showcasing web development and graphic design projects.",
+    images: ["/profile.jpg"],
   },
 };
 
