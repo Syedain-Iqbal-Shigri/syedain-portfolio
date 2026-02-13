@@ -5,6 +5,8 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
+import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '@/components/ui/breadcrumb'
 import { 
   Code2, Palette, Languages, GraduationCap, 
   Mail, MapPin, Download,
@@ -16,7 +18,9 @@ import {
   ArrowRight, Coffee, Rocket, Star,
   ExternalLink, Send, Phone, Calendar,
   Building2, Users, Trophy, Medal,
-  FileCheck, Quote, MessageSquare, Eye
+  FileCheck, Quote, MessageSquare, Eye,
+  FileSpreadsheet, FileType, Presentation,
+  Menu, X
 } from 'lucide-react'
 
 // ============ DATA ============
@@ -44,7 +48,26 @@ const skills = {
       { name: "Adobe Photoshop", level: 92 },
       { name: "Adobe Illustrator", level: 88 },
       { name: "Adobe After Effects", level: 78 },
-      { name: "MS Office", level: 95 },
+      { name: "Adobe Premiere Pro", level: 82 },
+      { name: "Figma", level: 85 },
+    ]
+  },
+  msOffice: {
+    title: "MS Office",
+    icon: FileText,
+    color: "#10B981",
+    items: [
+      { name: "Microsoft Excel", level: 95, icon: FileSpreadsheet },
+      { name: "Microsoft Word", level: 92, icon: FileType },
+      { name: "Microsoft PowerPoint", level: 90, icon: Presentation },
+    ]
+  },
+  cms: {
+    title: "CMS & Platforms",
+    icon: Globe,
+    color: "#21734b",
+    items: [
+      { name: "WordPress", level: 88 },
     ]
   }
 }
@@ -77,6 +100,7 @@ const projects = [
     title: "Excel Education System",
     category: "School Website",
     description: "A comprehensive school management website featuring student portals, course management, attendance tracking, and parent communication system with modern responsive design.",
+    fullDescription: "A comprehensive school management website featuring student portals, course management, attendance tracking, and parent communication system with modern responsive design. Built with a focus on user experience and accessibility, the platform serves over 500 students and 50 teachers. Features include real-time grade updates, homework submission system, and automated attendance notifications.",
     image: "/project-school.png",
     technologies: ["HTML5", "CSS3", "JavaScript", "PHP", "MySQL", "Bootstrap"],
     color: "#3182CE",
@@ -87,6 +111,7 @@ const projects = [
     title: "Education Registration System",
     category: "Web Application",
     description: "Full-featured student registration and enrollment system with automated workflows, document verification, payment integration, and administrative dashboard for educational institutions.",
+    fullDescription: "Full-featured student registration and enrollment system with automated workflows, document verification, payment integration, and administrative dashboard for educational institutions. Streamlines the entire admission process from application to enrollment, reducing paperwork by 70% and processing time by 50%.",
     image: "/project-registration.png",
     technologies: ["PHP", "Laravel", "MySQL", "JavaScript", "Bootstrap", "AJAX"],
     color: "#805AD5",
@@ -97,6 +122,7 @@ const projects = [
     title: "Vehicle Number Plate Identifier",
     category: "AI/ML System",
     description: "Intelligent Automatic Number Plate Recognition (ANPR) system using computer vision and machine learning to detect, extract, and identify vehicle license plates from images and video streams.",
+    fullDescription: "Intelligent Automatic Number Plate Recognition (ANPR) system using computer vision and machine learning to detect, extract, and identify vehicle license plates from images and video streams. Achieves 95% accuracy in various lighting conditions and supports multiple plate formats.",
     image: "/project-vehicle.png",
     technologies: ["Python", "OpenCV", "TensorFlow", "Tesseract OCR", "NumPy", "Flask"],
     color: "#38A169",
@@ -107,6 +133,7 @@ const projects = [
     title: "Tour Master",
     category: "Travel Website",
     description: "Dynamic tourism and travel booking platform featuring destination showcases, tour package management, booking system, and interactive maps for travelers exploring beautiful regions.",
+    fullDescription: "Dynamic tourism and travel booking platform featuring destination showcases, tour package management, booking system, and interactive maps for travelers exploring beautiful regions. Integrated with payment gateways and supports multi-language content for international tourists.",
     image: "/project-tour.png",
     technologies: ["HTML5", "CSS3", "JavaScript", "PHP", "MySQL", "Google Maps API"],
     color: "#D69E2E",
@@ -117,6 +144,7 @@ const projects = [
     title: "E-Commerce Platform",
     category: "Online Store",
     description: "Feature-rich e-commerce solution with product catalog, shopping cart, secure checkout, order management, customer accounts, and admin panel for inventory control.",
+    fullDescription: "Feature-rich e-commerce solution with product catalog, shopping cart, secure checkout, order management, customer accounts, and admin panel for inventory control. Supports multiple payment methods and includes inventory management with low-stock alerts.",
     image: "/project-ecommerce.png",
     technologies: ["PHP", "Laravel", "MySQL", "JavaScript", "Stripe API", "Bootstrap"],
     color: "#D53F8C",
@@ -127,6 +155,7 @@ const projects = [
     title: "Portfolio Dashboard",
     category: "Analytics Platform",
     description: "Modern portfolio analytics dashboard with interactive data visualizations, project tracking, performance metrics, and beautiful reporting interface for creative professionals.",
+    fullDescription: "Modern portfolio analytics dashboard with interactive data visualizations, project tracking, performance metrics, and beautiful reporting interface for creative professionals. Features real-time data updates and customizable widgets for personalized dashboard experience.",
     image: "/project-portfolio.png",
     technologies: ["React", "TypeScript", "Chart.js", "Tailwind CSS", "Node.js", "MongoDB"],
     color: "#E53E3E",
@@ -260,8 +289,139 @@ const references = [
     color: "#805AD5"
   },
 ]
+// ============ MOLECULAR NETWORK BACKGROUND ============
 
-// ============ COMPONENTS ============
+function BubbleBackground() {
+  const [mounted, setMounted] = useState(false)
+  const [molecules, setMolecules] = useState<Array<{
+    id: number
+    x: number
+    y: number
+    size: number
+    type: 'large' | 'small'
+  }>>([])
+  const [bonds, setBonds] = useState<Array<{
+    x1: number
+    y1: number
+    x2: number
+    y2: number
+  }>>([])
+
+  useEffect(() => {
+    const moleculeData: Array<{
+      id: number
+      x: number
+      y: number
+      size: number
+      type: 'large' | 'small'
+    }> = []
+    const bondData: Array<{ x1: number; y1: number; x2: number; y2: number }> = []
+    
+    // Hexagonal grid spacing
+    const spacing = 55
+    const rowHeight = spacing * 0.866
+    const cols = 40
+    const rows = 60
+    let id = 0
+    
+    // Generate hexagonal molecular grid
+    for (let row = 0; row < rows; row++) {
+      for (let col = 0; col < cols; col++) {
+        const offsetX = (row % 2) * (spacing / 2)
+        const x = col * spacing + offsetX
+        const y = row * rowHeight
+        
+        // Alternate between large and small molecules
+        const isLarge = (row + col) % 3 === 0
+        
+        moleculeData.push({
+          id: id++,
+          x,
+          y,
+          size: isLarge ? 6 : 4,
+          type: isLarge ? 'large' : 'small',
+        })
+      }
+    }
+    
+    // Create bonds between molecules
+    const maxDist = spacing * 1.15
+    
+    moleculeData.forEach((mol, i) => {
+      moleculeData.slice(i + 1).forEach((other) => {
+        const dist = Math.sqrt(
+          Math.pow(mol.x - other.x, 2) + Math.pow(mol.y - other.y, 2)
+        )
+        if (dist < maxDist && dist > spacing * 0.7) {
+          bondData.push({
+            x1: mol.x,
+            y1: mol.y,
+            x2: other.x,
+            y2: other.y,
+          })
+        }
+      })
+    })
+    
+    setMolecules(moleculeData)
+    setBonds(bondData)
+    setMounted(true)
+  }, [])
+
+  if (!mounted) return null
+
+  return (
+    <div className="molecular-network">
+      <svg 
+        viewBox="0 0 2200 3500" 
+        preserveAspectRatio="xMidYMid slice"
+      >
+        <defs>
+          {/* Molecule shape - hexagonal node */}
+          <pattern id="hexPattern" width="12" height="12" patternUnits="userSpaceOnUse">
+            <polygon 
+              points="6,0 12,3 12,9 6,12 0,9 0,3" 
+              fill="none"
+              stroke="rgba(80, 80, 80, 0.4)"
+              strokeWidth="1"
+            />
+          </pattern>
+        </defs>
+        
+        {/* Bond lines - dark grey */}
+        {bonds.map((bond, i) => (
+          <line
+            key={i}
+            x1={bond.x1}
+            y1={bond.y1}
+            x2={bond.x2}
+            y2={bond.y2}
+            stroke="rgba(100, 100, 100, 0.25)"
+            strokeWidth="1"
+          />
+        ))}
+        
+        {/* Molecule nodes - hollow hexagonal shapes */}
+        {molecules.map((mol) => (
+          <polygon
+            key={mol.id}
+            points={`
+              ${mol.x},${mol.y - mol.size}
+              ${mol.x + mol.size * 0.866},${mol.y - mol.size * 0.5}
+              ${mol.x + mol.size * 0.866},${mol.y + mol.size * 0.5}
+              ${mol.x},${mol.y + mol.size}
+              ${mol.x - mol.size * 0.866},${mol.y + mol.size * 0.5}
+              ${mol.x - mol.size * 0.866},${mol.y - mol.size * 0.5}
+            `}
+            fill="none"
+            stroke="rgba(80, 80, 80, 0.35)"
+            strokeWidth="1.5"
+          />
+        ))}
+      </svg>
+    </div>
+  )
+}
 
 // 3D Tilt Card
 function TiltCard({ children, className = '' }: { children: React.ReactNode; className?: string }) {
@@ -297,14 +457,14 @@ function TiltCard({ children, className = '' }: { children: React.ReactNode; cla
   return <div ref={cardRef} className={`transition-transform duration-200 ease-out ${className}`}>{children}</div>
 }
 
-// Skill Progress Bar
-function SkillBar({ name, level, color }: { name: string; level: number; color: string }) {
+// Skill Progress Bar - Fast Animation
+function SkillBar({ name, level, color, icon: Icon }: { name: string; level: number; color: string; icon?: React.ComponentType<{ className?: string }> }) {
   const [width, setWidth] = useState(0)
   const ref = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) setTimeout(() => setWidth(level), 200) },
+      ([entry]) => { if (entry.isIntersecting) setTimeout(() => setWidth(level), 100) },
       { threshold: 0.1 }
     )
     if (ref.current) observer.observe(ref.current)
@@ -312,16 +472,21 @@ function SkillBar({ name, level, color }: { name: string; level: number; color: 
   }, [level])
 
   return (
-    <div ref={ref} className="mb-4 last:mb-0">
+    <div ref={ref} className="mb-4 last:mb-0 group">
       <div className="flex justify-between items-center mb-2">
-        <span className="text-sm font-medium text-gray-700">{name}</span>
+        <div className="flex items-center gap-2">
+          {Icon && <Icon className="w-4 h-4" style={{ color }} />}
+          <span className="text-sm font-medium text-gray-700">{name}</span>
+        </div>
         <span className="text-sm text-gray-500">{level}%</span>
       </div>
-      <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
+      <div className="h-2.5 bg-gray-100 rounded-full overflow-hidden">
         <div 
-          className="h-full rounded-full transition-all duration-1000 ease-out"
+          className="h-full rounded-full transition-all duration-800 ease-out relative overflow-hidden"
           style={{ width: `${width}%`, backgroundColor: color }}
-        />
+        >
+          <div className="absolute inset-0 shimmer-effect" />
+        </div>
       </div>
     </div>
   )
@@ -334,7 +499,7 @@ function LanguageBar({ name, level, percent }: { name: string; level: string; pe
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) setTimeout(() => setWidth(percent), 200) },
+      ([entry]) => { if (entry.isIntersecting) setTimeout(() => setWidth(percent), 100) },
       { threshold: 0.1 }
     )
     if (ref.current) observer.observe(ref.current)
@@ -357,9 +522,11 @@ function LanguageBar({ name, level, percent }: { name: string; level: string; pe
       </div>
       <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
         <div 
-          className="h-full bg-gradient-to-r from-[#3182CE] to-[#805AD5] rounded-full transition-all duration-1000 ease-out"
+          className="h-full bg-gradient-to-r from-[#3182CE] to-[#805AD5] rounded-full transition-all duration-800 ease-out relative overflow-hidden"
           style={{ width: `${width}%` }}
-        />
+        >
+          <div className="absolute inset-0 shimmer-effect" />
+        </div>
       </div>
     </div>
   )
@@ -389,9 +556,37 @@ function Section({ id, children, className = '' }: { id: string; children: React
   )
 }
 
-// Project Card Component
+// Section Breadcrumb Component
+function SectionBreadcrumb({ items }: { items: string[] }) {
+  return (
+    <Breadcrumb className="mb-4">
+      <BreadcrumbList className="flex-wrap">
+        <BreadcrumbItem>
+          <BreadcrumbLink href="#hero" className="text-gray-500 hover:text-gray-700 text-sm">Home</BreadcrumbLink>
+        </BreadcrumbItem>
+        {items.map((item, index) => (
+          <div key={index} className="flex items-center gap-2">
+            <BreadcrumbSeparator className="text-gray-400" />
+            <BreadcrumbItem>
+              {index === items.length - 1 ? (
+                <BreadcrumbPage className="text-gray-900 font-medium text-sm">{item}</BreadcrumbPage>
+              ) : (
+                <BreadcrumbLink href={`#${item.toLowerCase().replace(/\s+/g, '-')}`} className="text-gray-500 hover:text-gray-700 text-sm">
+                  {item}
+                </BreadcrumbLink>
+              )}
+            </BreadcrumbItem>
+          </div>
+        ))}
+      </BreadcrumbList>
+    </Breadcrumb>
+  )
+}
+
+// Project Card Component - Previous Style with Hover Overlay
 function ProjectCard({ project, index }: { project: typeof projects[0]; index: number }) {
   const [isHovered, setIsHovered] = useState(false)
+  const [isExpanded, setIsExpanded] = useState(false)
   
   return (
     <div 
@@ -401,11 +596,13 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
     >
       <Card className="overflow-hidden bg-white border border-gray-100 hover:border-gray-200 transition-all duration-300 hover:shadow-xl">
         <div className="relative aspect-video overflow-hidden">
-          <img 
-            src={project.image} 
-            alt={project.title}
-            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+          <div 
+            className="absolute inset-0 bg-gradient-to-br"
+            style={{ background: `linear-gradient(135deg, ${project.color}dd, ${project.color}88)` }}
           />
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="text-white text-6xl font-bold opacity-20">{project.title.charAt(0)}</div>
+          </div>
           <div className={`absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent transition-opacity duration-300 ${isHovered ? 'opacity-100' : 'opacity-0'}`} />
           <div className={`absolute bottom-0 left-0 right-0 p-4 transform transition-all duration-300 ${isHovered ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
             <div className="flex gap-2">
@@ -427,9 +624,25 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
           <h3 className="text-lg font-bold text-gray-800 mb-2 group-hover:text-[#3182CE] transition-colors">
             {project.title}
           </h3>
-          <p className="text-sm text-gray-500 mb-4 line-clamp-2">
-            {project.description}
+          <p className={`text-sm text-gray-500 mb-4 leading-relaxed ${!isExpanded ? 'line-clamp-2' : ''}`}>
+            {isExpanded && project.fullDescription ? project.fullDescription : project.description}
           </p>
+          {!isExpanded && project.fullDescription && (
+            <button
+              onClick={() => setIsExpanded(true)}
+              className="flex items-center gap-1 text-[#3182CE] text-sm font-medium hover:text-[#2C5282] transition-colors mb-3"
+            >
+              Read more <ChevronDown className="w-4 h-4" />
+            </button>
+          )}
+          {isExpanded && project.fullDescription && (
+            <button
+              onClick={() => setIsExpanded(false)}
+              className="flex items-center gap-1 text-[#3182CE] text-sm font-medium hover:text-[#2C5282] transition-colors mb-3"
+            >
+              Show less <ChevronDown className="w-4 h-4 rotate-180" />
+            </button>
+          )}
           <div className="flex flex-wrap gap-1.5">
             {project.technologies.slice(0, 4).map((tech, i) => (
               <Badge key={i} variant="secondary" className="bg-gray-100 text-gray-600 text-xs border-0">
@@ -448,11 +661,53 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
   )
 }
 
+// Counter Animation Hook
+function useCountUp(end: number, duration: number = 800, start: boolean = false) {
+  const [count, setCount] = useState(0)
+
+  useEffect(() => {
+    if (!start) return
+
+    let startTime: number | null = null
+    const animate = (timestamp: number) => {
+      if (!startTime) startTime = timestamp
+      const progress = Math.min((timestamp - startTime) / duration, 1)
+      setCount(Math.floor(progress * end))
+      if (progress < 1) {
+        requestAnimationFrame(animate)
+      }
+    }
+    requestAnimationFrame(animate)
+  }, [end, duration, start])
+
+  return count
+}
+
+// Stats Counter Component
+function StatsCounter({ value, label, icon: Icon, isInView }: { value: string; label: string; icon: React.ComponentType<{ className?: string }>; isInView: boolean }) {
+  const numericValue = parseInt(value.replace(/\D/g, ''))
+  const suffix = value.replace(/\d/g, '')
+  const count = useCountUp(numericValue, 800, isInView)
+
+  return (
+    <div className="bg-white/80 backdrop-blur rounded-2xl p-6 text-center shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+      <Icon className="w-8 h-8 mx-auto mb-3 text-[#3182CE]" />
+      <div className="text-3xl font-bold text-gray-800 mb-1">
+        {count}{suffix}
+      </div>
+      <div className="text-sm text-gray-500">{label}</div>
+    </div>
+  )
+}
+
 // ============ MAIN PORTFOLIO ============
 export default function Portfolio() {
   const [scrolled, setScrolled] = useState(false)
   const [activeSection, setActiveSection] = useState('hero')
   const [loaded, setLoaded] = useState(false)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const statsRef = useRef<HTMLDivElement>(null)
+  const [statsInView, setStatsInView] = useState(false)
 
   useEffect(() => {
     requestAnimationFrame(() => {
@@ -474,7 +729,19 @@ export default function Portfolio() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  const scrollTo = (id: string) => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) setStatsInView(true) },
+      { threshold: 0.1 }
+    )
+    if (statsRef.current) observer.observe(statsRef.current)
+    return () => observer.disconnect()
+  }, [])
+
+  const scrollTo = (id: string) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
+    setMobileMenuOpen(false)
+  }
 
   const handleDownloadCV = () => {
     const link = document.createElement('a')
@@ -492,15 +759,8 @@ export default function Portfolio() {
   return (
     <div className="min-h-screen bg-[#F5F7FA] text-[#1A202C] overflow-x-hidden">
       
-      {/* ========== ANIMATED BACKGROUND ========== */}
-      <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
-        <div className="absolute w-[600px] h-[600px] rounded-full filter blur-[100px] opacity-50 animate-blob" 
-          style={{ background: '#E6FFFA', top: '-10%', left: '-10%' }} />
-        <div className="absolute w-[500px] h-[500px] rounded-full filter blur-[100px] opacity-50 animate-blob" 
-          style={{ background: '#EBF8FF', bottom: '-10%', right: '-10%', animationDelay: '7s' }} />
-        <div className="absolute w-[400px] h-[400px] rounded-full filter blur-[100px] opacity-40 animate-blob" 
-          style={{ background: '#FAF5FF', top: '40%', right: '20%', animationDelay: '14s' }} />
-      </div>
+      {/* ========== PREMIUM BUBBLE BACKGROUND ========== */}
+      <BubbleBackground />
 
       {/* ========== NAVIGATION ========== */}
       <nav className={`fixed top-4 left-1/2 -translate-x-1/2 z-50 transition-all duration-300 ${scrolled ? 'top-2' : 'top-4'}`}>
@@ -509,6 +769,7 @@ export default function Portfolio() {
             <span className="text-[#3182CE]">S</span>yedain
           </div>
           
+          {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-6">
             {['About', 'Skills', 'Projects', 'Contact'].map((item) => (
               <button
@@ -528,11 +789,42 @@ export default function Portfolio() {
 
           <Button 
             onClick={() => scrollTo('contact')}
-            className="rounded-full px-5 bg-[#1A202C] hover:bg-[#2D3748] text-white text-sm"
+            className="hidden md:flex rounded-full px-5 bg-[#1A202C] hover:bg-[#2D3748] text-white text-sm"
           >
             Hire Me
           </Button>
+
+          {/* Mobile Menu Button */}
+          <button
+            className="md:hidden p-2"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          >
+            {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+          </button>
         </div>
+
+        {/* Mobile Menu */}
+        {mobileMenuOpen && (
+          <div className="md:hidden glass-nav rounded-2xl mt-2 p-4 shadow-lg">
+            <div className="flex flex-col gap-3">
+              {['About', 'Skills', 'Projects', 'Contact'].map((item) => (
+                <button
+                  key={item}
+                  onClick={() => scrollTo(item.toLowerCase())}
+                  className="text-sm font-medium text-gray-700 hover:text-[#3182CE] py-2 text-left"
+                >
+                  {item}
+                </button>
+              ))}
+              <Button 
+                onClick={() => scrollTo('contact')}
+                className="rounded-full bg-[#1A202C] hover:bg-[#2D3748] text-white text-sm mt-2"
+              >
+                Hire Me
+              </Button>
+            </div>
+          </div>
+        )}
       </nav>
 
       {/* ========== HERO SECTION ========== */}
@@ -545,7 +837,7 @@ export default function Portfolio() {
           </div>
 
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-extrabold mb-6 leading-[1.1] tracking-tight">
-            <span className="text-gray-800">Hi, I'm</span>
+            <span className="text-gray-800">Hi, I&apos;m</span>
             <br />
             <span className="gradient-text">Syedain Shigree</span>
           </h1>
@@ -579,18 +871,21 @@ export default function Portfolio() {
 
           <div className="flex justify-center gap-3">
             {[
-              { icon: Github, label: 'GitHub' },
-              { icon: Linkedin, label: 'LinkedIn' },
-              { icon: Twitter, label: 'Twitter' },
-              { icon: Instagram, label: 'Instagram' },
+              { icon: Github, label: 'GitHub', url: 'https://github.com/Syedain-Iqbal-Shigri' },
+              { icon: Linkedin, label: 'LinkedIn', url: 'https://www.linkedin.com/in/syedain-shigri-72aa793a8/' },
+              { icon: Twitter, label: 'Twitter', url: 'https://x.com/SyedainShigri' },
+              { icon: Instagram, label: 'Instagram', url: 'https://www.instagram.com/cyyidaeyn' },
             ].map((social, i) => (
-              <button
+              <a
                 key={i}
+                href={social.url}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-12 h-12 rounded-full bg-white border border-gray-200 flex items-center justify-center text-gray-500 hover:text-[#3182CE] hover:border-[#3182CE] hover:shadow-md transition-all"
                 aria-label={social.label}
               >
                 <social.icon className="w-5 h-5" />
-              </button>
+              </a>
             ))}
           </div>
 
@@ -602,14 +897,10 @@ export default function Portfolio() {
 
       {/* ========== STATS SECTION ========== */}
       <Section id="stats" className="py-16 px-6">
-        <div className="max-w-5xl mx-auto">
+        <div className="max-w-5xl mx-auto" ref={statsRef}>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {stats.map((stat, i) => (
-              <div key={i} className="bg-white/80 backdrop-blur rounded-2xl p-6 text-center shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
-                <stat.icon className="w-8 h-8 mx-auto mb-3 text-[#3182CE]" />
-                <div className="text-3xl font-bold text-gray-800 mb-1">{stat.value}</div>
-                <div className="text-sm text-gray-500">{stat.label}</div>
-              </div>
+              <StatsCounter key={i} value={stat.value} label={stat.label} icon={stat.icon} isInView={statsInView} />
             ))}
           </div>
         </div>
@@ -618,6 +909,7 @@ export default function Portfolio() {
       {/* ========== ABOUT SECTION ========== */}
       <Section id="about" className="py-24 px-6">
         <div className="max-w-6xl mx-auto">
+          <SectionBreadcrumb items={['About']} />
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             
             <div className="relative">
@@ -661,7 +953,7 @@ export default function Portfolio() {
               </h2>
 
               <p className="text-gray-600 text-lg leading-relaxed mb-6">
-                I'm a multi-skilled professional from the breathtaking region of Skardu, Pakistan. 
+                I&apos;m a multi-skilled professional from the breathtaking region of Skardu, Pakistan. 
                 With expertise spanning full-stack development and graphic design, I bridge the 
                 gap between functionality and aesthetics.
               </p>
@@ -700,6 +992,7 @@ export default function Portfolio() {
       {/* ========== SKILLS SECTION ========== */}
       <Section id="skills" className="py-24 px-6 bg-white">
         <div className="max-w-6xl mx-auto">
+          <SectionBreadcrumb items={['Skills']} />
           <div className="text-center mb-16">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-50 mb-6">
               <Code2 className="w-4 h-4 text-purple-500" />
@@ -713,7 +1006,7 @@ export default function Portfolio() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {Object.entries(skills).map(([key, category]) => (
               <Card key={key} className="bg-[#F5F7FA] border-0 shadow-sm hover:shadow-md transition-shadow">
                 <CardContent className="p-8">
@@ -729,7 +1022,13 @@ export default function Portfolio() {
                   
                   <div className="space-y-1">
                     {category.items.map((skill, i) => (
-                      <SkillBar key={i} name={skill.name} level={skill.level} color={category.color} />
+                      <SkillBar 
+                        key={i} 
+                        name={skill.name} 
+                        level={skill.level} 
+                        color={category.color}
+                        icon={'icon' in skill ? skill.icon : undefined}
+                      />
                     ))}
                   </div>
                 </CardContent>
@@ -742,6 +1041,7 @@ export default function Portfolio() {
       {/* ========== SERVICES SECTION ========== */}
       <Section id="services" className="py-24 px-6">
         <div className="max-w-6xl mx-auto">
+          <SectionBreadcrumb items={['Services']} />
           <div className="text-center mb-16">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-50 mb-6">
               <Star className="w-4 h-4 text-green-500" />
@@ -755,30 +1055,46 @@ export default function Portfolio() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <Accordion type="single" collapsible className="space-y-4">
             {services.map((service, i) => (
-              <TiltCard key={i}>
-                <Card className="h-full bg-white border border-gray-100 shadow-sm hover:shadow-lg transition-all cursor-pointer group">
-                  <CardContent className="p-6">
+              <AccordionItem key={i} value={`service-${i}`} className="bg-white rounded-2xl border border-gray-100 px-6 overflow-hidden">
+                <AccordionTrigger className="hover:no-underline py-6">
+                  <div className="flex items-center gap-4">
                     <div 
-                      className="w-14 h-14 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform"
+                      className="w-14 h-14 rounded-2xl flex items-center justify-center shrink-0"
                       style={{ backgroundColor: `${service.color}15` }}
                     >
                       <service.icon className="w-7 h-7" style={{ color: service.color }} />
                     </div>
-                    <h3 className="text-lg font-bold text-gray-800 mb-2">{service.title}</h3>
-                    <p className="text-sm text-gray-500">{service.desc}</p>
-                  </CardContent>
-                </Card>
-              </TiltCard>
+                    <div className="text-left">
+                      <h3 className="text-lg font-bold text-gray-800">{service.title}</h3>
+                      <p className="text-sm text-gray-500">{service.desc}</p>
+                    </div>
+                  </div>
+                </AccordionTrigger>
+                <AccordionContent className="pb-6">
+                  <div className="pl-20 space-y-3">
+                    <p className="text-gray-600">
+                      I provide comprehensive {service.title.toLowerCase()} services tailored to your specific needs. 
+                      With years of experience and a passion for excellence, I deliver results that exceed expectations.
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                      <Badge variant="secondary" className="bg-gray-100">Fast Delivery</Badge>
+                      <Badge variant="secondary" className="bg-gray-100">24/7 Support</Badge>
+                      <Badge variant="secondary" className="bg-gray-100">Quality Assured</Badge>
+                    </div>
+                  </div>
+                </AccordionContent>
+              </AccordionItem>
             ))}
-          </div>
+          </Accordion>
         </div>
       </Section>
 
       {/* ========== PROJECTS SECTION ========== */}
       <Section id="projects" className="py-24 px-6 bg-white">
         <div className="max-w-7xl mx-auto">
+          <SectionBreadcrumb items={['Projects']} />
           <div className="text-center mb-16">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-50 mb-6">
               <Rocket className="w-4 h-4 text-indigo-500" />
@@ -803,6 +1119,7 @@ export default function Portfolio() {
       {/* ========== WORK EXPERIENCE SECTION ========== */}
       <Section id="experience" className="py-24 px-6">
         <div className="max-w-4xl mx-auto">
+          <SectionBreadcrumb items={['Experience']} />
           <div className="text-center mb-16">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cyan-50 mb-6">
               <Briefcase className="w-4 h-4 text-cyan-500" />
@@ -867,6 +1184,7 @@ export default function Portfolio() {
       {/* ========== CERTIFICATIONS SECTION ========== */}
       <Section id="certifications" className="py-24 px-6 bg-white">
         <div className="max-w-6xl mx-auto">
+          <SectionBreadcrumb items={['Certifications']} />
           <div className="text-center mb-16">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-amber-50 mb-6">
               <Award className="w-4 h-4 text-amber-500" />
@@ -891,7 +1209,7 @@ export default function Portfolio() {
                     >
                       <cert.icon className="w-7 h-7" style={{ color: cert.color }} />
                     </div>
-                    <div className="flex-1">
+                    <div className="flex-1 min-w-0">
                       <h3 className="text-lg font-bold text-gray-800 mb-1">{cert.name}</h3>
                       <p className="text-gray-500 text-sm mb-2">{cert.issuer}</p>
                       <div className="flex items-center gap-4 text-xs text-gray-400">
@@ -916,6 +1234,7 @@ export default function Portfolio() {
       {/* ========== ACHIEVEMENTS SECTION ========== */}
       <Section id="achievements" className="py-24 px-6">
         <div className="max-w-6xl mx-auto">
+          <SectionBreadcrumb items={['Achievements']} />
           <div className="text-center mb-16">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-rose-50 mb-6">
               <Trophy className="w-4 h-4 text-rose-500" />
@@ -962,6 +1281,7 @@ export default function Portfolio() {
       {/* ========== LANGUAGES SECTION ========== */}
       <Section id="languages" className="py-24 px-6 bg-white">
         <div className="max-w-4xl mx-auto">
+          <SectionBreadcrumb items={['Languages']} />
           <div className="text-center mb-16">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cyan-50 mb-6">
               <Languages className="w-4 h-4 text-cyan-500" />
@@ -988,6 +1308,7 @@ export default function Portfolio() {
       {/* ========== EDUCATION SECTION ========== */}
       <Section id="education" className="py-24 px-6">
         <div className="max-w-4xl mx-auto">
+          <SectionBreadcrumb items={['Education']} />
           <div className="text-center mb-16">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-50 mb-6">
               <GraduationCap className="w-4 h-4 text-orange-500" />
@@ -1044,6 +1365,7 @@ export default function Portfolio() {
       {/* ========== REFERENCES SECTION ========== */}
       <Section id="references" className="py-24 px-6 bg-white">
         <div className="max-w-6xl mx-auto">
+          <SectionBreadcrumb items={['References']} />
           <div className="text-center mb-16">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-50 mb-6">
               <MessageSquare className="w-4 h-4 text-emerald-500" />
@@ -1161,16 +1483,16 @@ export default function Portfolio() {
 
               <div className="mt-6 pt-6 border-t border-gray-100">
                 <div className="flex justify-center gap-3">
-                  <a href="https://github.com/Syedain-Iqbal-Shigri" target="_blank" className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 hover:bg-[#3182CE] hover:text-white transition-all">
+                  <a href="https://github.com/Syedain-Iqbal-Shigri" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 hover:bg-[#3182CE] hover:text-white transition-all">
                     <Github className="w-5 h-5" />
                   </a>
-                  <a href="https://www.linkedin.com/in/syedain-shigri-72aa793a8/" target="_blank" className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 hover:bg-[#3182CE] hover:text-white transition-all">
+                  <a href="https://www.linkedin.com/in/syedain-shigri-72aa793a8/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 hover:bg-[#3182CE] hover:text-white transition-all">
                     <Linkedin className="w-5 h-5" />
                   </a>
-                  <a href="https://x.com/SyedainShigri" target="_blank" className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 hover:bg-[#3182CE] hover:text-white transition-all">
+                  <a href="https://x.com/SyedainShigri" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 hover:bg-[#3182CE] hover:text-white transition-all">
                     <Twitter className="w-5 h-5" />
                   </a>
-                  <a href="https://www.instagram.com/cyyidaeyn" target="_blank" className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 hover:bg-[#3182CE] hover:text-white transition-all">
+                  <a href="https://www.instagram.com/cyyidaeyn" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 hover:bg-[#3182CE] hover:text-white transition-all">
                     <Instagram className="w-5 h-5" />
                   </a>
                 </div>
@@ -1198,12 +1520,20 @@ export default function Portfolio() {
             <div className="text-sm text-gray-400">
               2025 Syedain Shigree
             </div>
-          </div>
-
-          <div className="mt-8 pt-8 border-t border-gray-100 text-center">
-            <p className="text-sm text-gray-500">
-              Crafted with <span className="text-red-500">♥</span> in Skardu, Pakistan
-            </p>
+           </div>
+              <div className="mt-8 pt-8 border-t border-gray-100 text-center">
+              <p className="text-sm text-gray-500 flex items-center justify-center gap-2 flex-wrap">
+                <span className="text-gray-700 font-medium">Designed & Developed by</span>
+                <span className="font-semibold"><span className="text-blue-600">S</span><span className="text-black">yedain Shigree</span></span>
+                <span className="text-gray-400">|</span>
+                <span className="text-gray-600">© 2025 All Rights Reserved</span>
+              </p>
+              <p className="text-sm text-gray-500 flex items-center justify-center gap-1 mt-2">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-red-500" viewBox="0 0 20 20" fill="currentColor">
+                  <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
+                </svg>
+                <span className="italic">Skardu, Pakistan</span>
+              </p>
           </div>
         </div>
       </footer>

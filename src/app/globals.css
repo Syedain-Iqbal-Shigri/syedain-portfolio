@@ -119,11 +119,80 @@
   body {
     @apply bg-background text-foreground;
   }
+  html {
+    scroll-behavior: smooth;
+  }
 }
 
-/* Custom Portfolio Styles */
+/* ========================================
+   MOLECULAR NETWORK BACKGROUND
+   ======================================== */
 
-/* Glass Navigation - Transparent Mirror Effect */
+.molecular-network {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.molecular-network svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* ========================================
+   PROGRESS BAR ANIMATIONS - Fast 800ms
+   ======================================== */
+
+/* Shimmer Effect for Progress Bars */
+.shimmer-effect {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.5) 50%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Progress Bar Fill Animation */
+@keyframes progressFill {
+  from {
+    width: 0%;
+    opacity: 0.5;
+  }
+  to {
+    width: var(--progress);
+    opacity: 1;
+  }
+}
+
+/* Duration utility for progress bars */
+.duration-800 {
+  transition-duration: 800ms;
+}
+
+/* ========================================
+   GLASS NAVIGATION - Transparent Mirror Effect
+   ======================================== */
+
 .glass-nav {
   background: rgba(255, 255, 255, 0.1) !important;
   backdrop-filter: blur(12px) saturate(180%);
@@ -131,6 +200,32 @@
   border: 1px solid rgba(255, 255, 255, 0.2);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
 }
+
+/* ========================================
+   GRADIENT TEXT
+   ======================================== */
+
+.gradient-text {
+  background: linear-gradient(135deg, #3182CE 0%, #805AD5 50%, #D53F8C 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ========================================
+   SHADOW FLOAT
+   ======================================== */
+
+.shadow-float {
+  box-shadow: 
+    0 4px 6px -1px rgba(0, 0, 0, 0.05),
+    0 10px 15px -3px rgba(0, 0, 0, 0.05),
+    0 20px 25px -5px rgba(0, 0, 0, 0.03);
+}
+
+/* ========================================
+   TIMELINE STYLES
+   ======================================== */
 
 /* Mobile Timeline Fix */
 @media (max-width: 640px) {
@@ -147,43 +242,10 @@
   }
 }
 
-/* Gradient Text */
-.gradient-text {
-  background: linear-gradient(135deg, #3182CE 0%, #805AD5 50%, #D53F8C 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
+/* ========================================
+   LINE CLAMP
+   ======================================== */
 
-/* Shadow Float */
-.shadow-float {
-  box-shadow: 
-    0 4px 6px -1px rgba(0, 0, 0, 0.05),
-    0 10px 15px -3px rgba(0, 0, 0, 0.05),
-    0 20px 25px -5px rgba(0, 0, 0, 0.03);
-}
-
-/* Blob Animation */
-@keyframes blob {
-  0%, 100% {
-    transform: translate(0, 0) scale(1);
-  }
-  25% {
-    transform: translate(20px, -30px) scale(1.1);
-  }
-  50% {
-    transform: translate(-20px, 20px) scale(0.9);
-  }
-  75% {
-    transform: translate(30px, 10px) scale(1.05);
-  }
-}
-
-.animate-blob {
-  animation: blob 21s ease-in-out infinite;
-}
-
-/* Line Clamp */
 .line-clamp-2 {
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -191,12 +253,17 @@
   overflow: hidden;
 }
 
-/* Smooth Scroll */
-html {
-  scroll-behavior: smooth;
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
-/* Custom Scrollbar */
+/* ========================================
+   CUSTOM SCROLLBAR
+   ======================================== */
+
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -214,22 +281,140 @@ html {
   background: linear-gradient(180deg, #2C5282 0%, #6B46C1 100%);
 }
 
-/* Selection */
+/* ========================================
+   SELECTION
+   ======================================== */
+
 ::selection {
   background: rgba(49, 130, 206, 0.2);
   color: #1A202C;
 }
 
-/* Focus States */
+/* ========================================
+   FOCUS STATES
+   ======================================== */
+
 button:focus-visible,
 a:focus-visible {
   outline: 2px solid #3182CE;
   outline-offset: 2px;
 }
 
-/* Transitions */
+/* ========================================
+   TRANSITIONS
+   ======================================== */
+
 * {
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
 }
+
+/* ========================================
+   BOUNCE ANIMATION FOR SCROLL INDICATOR
+   ======================================== */
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0) translateX(-50%);
+  }
+  50% {
+    transform: translateY(-10px) translateX(-50%);
+  }
+}
+
+.animate-bounce {
+  animation: bounce 2s ease-in-out infinite;
+}
+
+/* ========================================
+   PULSE ANIMATION
+   ======================================== */
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* ========================================
+   MOBILE RESPONSIVE FIXES
+   ======================================== */
+
+@media (max-width: 640px) {
+  .mobile-text-wrap {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+  }
+
+  .mobile-badge-wrap {
+    flex-wrap: wrap;
+    gap: 0.25rem;
+  }
+}
+
+/* Touch-friendly tap targets */
+@media (hover: none) and (pointer: coarse) {
+  button, 
+  a, 
+  [role="button"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+/* ========================================
+   HOVER LIFT EFFECT
+   ======================================== */
+
+.hover-lift {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), 
+              box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.15);
+}
+
+/* ========================================
+   STAGGER REVEAL ANIMATION
+   ======================================== */
+
+@keyframes staggerReveal {
+  from { 
+    opacity: 0; 
+    transform: translateY(30px) scale(0.98); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0) scale(1); 
+  }
+}
+
+.animate-stagger-reveal {
+  animation: staggerReveal 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.stagger-hidden {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+/* Delay utilities */
+.delay-100 { animation-delay: 100ms; }
+.delay-200 { animation-delay: 200ms; }
+.delay-300 { animation-delay: 300ms; }
+.delay-400 { animation-delay: 400ms; }
+.delay-500 { animation-delay: 500ms; }
+.delay-600 { animation-delay: 600ms; }
+.delay-700 { animation-delay: 700ms; }
+.delay-800 { animation-delay: 800ms; }

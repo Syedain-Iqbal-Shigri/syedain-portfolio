@@ -14,16 +14,30 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://syedain-portfolio.vercel.app"),
   title: "Syedain Shigree | Full Stack Developer & Graphic Designer",
   description: "Professional portfolio of Syedain Shigree - Full Stack Developer and Graphic Designer from Skardu, Pakistan. Expert in PHP, Laravel, JavaScript, Python, and Adobe Creative Suite.",
   keywords: ["Syedain Shigree", "Full Stack Developer", "Graphic Designer", "Web Developer", "Laravel", "PHP", "JavaScript", "Python", "UI/UX", "Skardu", "Pakistan", "Freelancer"],
   authors: [{ name: "Syedain Shigree" }],
   icons: {
-    icon: "/favicon.ico",
+    icon: [
+      { url: "/favicon-16x16.svg", sizes: "16x16", type: "image/svg+xml" },
+      { url: "/favicon-32x32.svg", sizes: "32x32", type: "image/svg+xml" },
+      { url: "/favicon-48x48.svg", sizes: "48x48", type: "image/svg+xml" },
+      { url: "/favicon-64x64.svg", sizes: "64x64", type: "image/svg+xml" },
+      { url: "/favicon.svg", type: "image/svg+xml" },
+    ],
+    apple: [
+      { url: "/apple-touch-icon.svg", sizes: "180x180", type: "image/svg+xml" },
+    ],
+    other: [
+      { url: "/android-chrome-192x192.svg", sizes: "192x192", type: "image/svg+xml" },
+      { url: "/android-chrome-512x512.svg", sizes: "512x512", type: "image/svg+xml" },
+    ],
   },
   openGraph: {
     title: "Syedain Shigree | Full Stack Developer & Graphic Designer",
-    description: "Professional portfolio showcasing web development and graphic design projects. Crafting beautiful digital experiences from Skardu, Pakistan.",
+    description: "Professional portfolio showcasing web development and graphic design projects. Crafting beautiful digital experiences.",
     url: "https://syedain-portfolio.vercel.app",
     siteName: "Syedain Shigree Portfolio",
     type: "website",
