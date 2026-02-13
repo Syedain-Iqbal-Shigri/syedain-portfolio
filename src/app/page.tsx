@@ -140,17 +140,17 @@ const projects = [
     liveUrl: "#",
     githubUrl: "#"
   },
-  {
-    title: "E-Commerce Platform",
-    category: "Online Store",
-    description: "Feature-rich e-commerce solution with product catalog, shopping cart, secure checkout, order management, customer accounts, and admin panel for inventory control.",
-    fullDescription: "Feature-rich e-commerce solution with product catalog, shopping cart, secure checkout, order management, customer accounts, and admin panel for inventory control. Supports multiple payment methods and includes inventory management with low-stock alerts.",
-    image: "/project-ecommerce.png",
-    technologies: ["PHP", "Laravel", "MySQL", "JavaScript", "Stripe API", "Bootstrap"],
-    color: "#D53F8C",
-    liveUrl: "#",
-    githubUrl: "#"
-  },
+ {
+  title: "E-Commerce Platform",
+  category: "Online Store",
+  description: "Feature-rich e-commerce solution with product catalog, shopping cart, secure checkout, order management, customer accounts, and admin panel for inventory control.",
+  fullDescription: "Feature-rich e-commerce solution with product catalog, shopping cart, secure checkout, order management, customer accounts, and admin panel for inventory control. Supports multiple payment methods and includes inventory management with low-stock alerts.",
+  image: "/project-ecommerce.png",
+  technologies: ["PHP", "Laravel", "MySQL", "JavaScript", "Stripe API", "Bootstrap"],
+  color: "#D53F8C",
+  liveUrl: "#",
+  githubUrl: "#"
+},
   {
     title: "Portfolio Dashboard",
     category: "Analytics Platform",
@@ -289,139 +289,7 @@ const references = [
     color: "#805AD5"
   },
 ]
-// ============ MOLECULAR NETWORK BACKGROUND ============
 
-function BubbleBackground() {
-  const [mounted, setMounted] = useState(false)
-  const [molecules, setMolecules] = useState<Array<{
-    id: number
-    x: number
-    y: number
-    size: number
-    type: 'large' | 'small'
-  }>>([])
-  const [bonds, setBonds] = useState<Array<{
-    x1: number
-    y1: number
-    x2: number
-    y2: number
-  }>>([])
-
-  useEffect(() => {
-    const moleculeData: Array<{
-      id: number
-      x: number
-      y: number
-      size: number
-      type: 'large' | 'small'
-    }> = []
-    const bondData: Array<{ x1: number; y1: number; x2: number; y2: number }> = []
-    
-    // Hexagonal grid spacing
-    const spacing = 55
-    const rowHeight = spacing * 0.866
-    const cols = 40
-    const rows = 60
-    let id = 0
-    
-    // Generate hexagonal molecular grid
-    for (let row = 0; row < rows; row++) {
-      for (let col = 0; col < cols; col++) {
-        const offsetX = (row % 2) * (spacing / 2)
-        const x = col * spacing + offsetX
-        const y = row * rowHeight
-        
-        // Alternate between large and small molecules
-        const isLarge = (row + col) % 3 === 0
-        
-        moleculeData.push({
-          id: id++,
-          x,
-          y,
-          size: isLarge ? 6 : 4,
-          type: isLarge ? 'large' : 'small',
-        })
-      }
-    }
-    
-    // Create bonds between molecules
-    const maxDist = spacing * 1.15
-    
-    moleculeData.forEach((mol, i) => {
-      moleculeData.slice(i + 1).forEach((other) => {
-        const dist = Math.sqrt(
-          Math.pow(mol.x - other.x, 2) + Math.pow(mol.y - other.y, 2)
-        )
-        if (dist < maxDist && dist > spacing * 0.7) {
-          bondData.push({
-            x1: mol.x,
-            y1: mol.y,
-            x2: other.x,
-            y2: other.y,
-          })
-        }
-      })
-    })
-    
-    setMolecules(moleculeData)
-    setBonds(bondData)
-    setMounted(true)
-  }, [])
-
-  if (!mounted) return null
-
-  return (
-    <div className="molecular-network">
-      <svg 
-        viewBox="0 0 2200 3500" 
-        preserveAspectRatio="xMidYMid slice"
-      >
-        <defs>
-          {/* Molecule shape - hexagonal node */}
-          <pattern id="hexPattern" width="12" height="12" patternUnits="userSpaceOnUse">
-            <polygon 
-              points="6,0 12,3 12,9 6,12 0,9 0,3" 
-              fill="none"
-              stroke="rgba(80, 80, 80, 0.4)"
-              strokeWidth="1"
-            />
-          </pattern>
-        </defs>
-        
-        {/* Bond lines - dark grey */}
-        {bonds.map((bond, i) => (
-          <line
-            key={i}
-            x1={bond.x1}
-            y1={bond.y1}
-            x2={bond.x2}
-            y2={bond.y2}
-            stroke="rgba(100, 100, 100, 0.25)"
-            strokeWidth="1"
-          />
-        ))}
-        
-        {/* Molecule nodes - hollow hexagonal shapes */}
-        {molecules.map((mol) => (
-          <polygon
-            key={mol.id}
-            points={`
-              ${mol.x},${mol.y - mol.size}
-              ${mol.x + mol.size * 0.866},${mol.y - mol.size * 0.5}
-              ${mol.x + mol.size * 0.866},${mol.y + mol.size * 0.5}
-              ${mol.x},${mol.y + mol.size}
-              ${mol.x - mol.size * 0.866},${mol.y + mol.size * 0.5}
-              ${mol.x - mol.size * 0.866},${mol.y - mol.size * 0.5}
-            `}
-            fill="none"
-            stroke="rgba(80, 80, 80, 0.35)"
-            strokeWidth="1.5"
-          />
-        ))}
-      </svg>
-    </div>
-  )
-}
 
 // 3D Tilt Card
 function TiltCard({ children, className = '' }: { children: React.ReactNode; className?: string }) {
@@ -583,7 +451,7 @@ function SectionBreadcrumb({ items }: { items: string[] }) {
   )
 }
 
-// Project Card Component - Previous Style with Hover Overlay
+// // Project Card Component - Previous Style with Hover Overlay
 function ProjectCard({ project, index }: { project: typeof projects[0]; index: number }) {
   const [isHovered, setIsHovered] = useState(false)
   const [isExpanded, setIsExpanded] = useState(false)
@@ -596,13 +464,11 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
     >
       <Card className="overflow-hidden bg-white border border-gray-100 hover:border-gray-200 transition-all duration-300 hover:shadow-xl">
         <div className="relative aspect-video overflow-hidden">
-          <div 
-            className="absolute inset-0 bg-gradient-to-br"
-            style={{ background: `linear-gradient(135deg, ${project.color}dd, ${project.color}88)` }}
+          <img 
+            src={project.image} 
+            alt={project.title}
+            className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
           />
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="text-white text-6xl font-bold opacity-20">{project.title.charAt(0)}</div>
-          </div>
           <div className={`absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent transition-opacity duration-300 ${isHovered ? 'opacity-100' : 'opacity-0'}`} />
           <div className={`absolute bottom-0 left-0 right-0 p-4 transform transition-all duration-300 ${isHovered ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
             <div className="flex gap-2">
@@ -758,10 +624,6 @@ export default function Portfolio() {
 
   return (
     <div className="min-h-screen bg-[#F5F7FA] text-[#1A202C] overflow-x-hidden">
-      
-      {/* ========== PREMIUM BUBBLE BACKGROUND ========== */}
-      <BubbleBackground />
-
       {/* ========== NAVIGATION ========== */}
       <nav className={`fixed top-4 left-1/2 -translate-x-1/2 z-50 transition-all duration-300 ${scrolled ? 'top-2' : 'top-4'}`}>
         <div className={`glass-nav rounded-full px-6 py-3 flex items-center gap-8 ${scrolled ? 'shadow-lg' : 'shadow-xl'}`}>
@@ -1516,11 +1378,7 @@ export default function Portfolio() {
               <a href="#projects" className="hover:text-[#3182CE] transition-colors">Projects</a>
               <a href="#contact" className="hover:text-[#3182CE] transition-colors">Contact</a>
             </div>
-
-            <div className="text-sm text-gray-400">
-              2025 Syedain Shigree
-            </div>
-           </div>
+         </div>
               <div className="mt-8 pt-8 border-t border-gray-100 text-center">
               <p className="text-sm text-gray-500 flex items-center justify-center gap-2 flex-wrap">
                 <span className="text-gray-700 font-medium">Designed & Developed by</span>
